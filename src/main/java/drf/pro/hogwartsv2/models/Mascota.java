@@ -19,6 +19,6 @@ public class Mascota {
     private String especie;
 
     @OneToOne
-    @JoinColumn(name = "estudiante_id", unique = true)
+    @JoinColumn(name = "id_estudiante", unique = true)
     private Estudiante estudiante;
 }
