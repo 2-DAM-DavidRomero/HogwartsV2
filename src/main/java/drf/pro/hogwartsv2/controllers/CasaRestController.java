@@ -5,9 +5,7 @@ import drf.pro.hogwartsv2.dtos.response.CasaDTO;
 import drf.pro.hogwartsv2.services.CasaSerivice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +24,6 @@ public class CasaRestController {
         }
         return ResponseEntity.ok(casas);
     }
+
+
 }
