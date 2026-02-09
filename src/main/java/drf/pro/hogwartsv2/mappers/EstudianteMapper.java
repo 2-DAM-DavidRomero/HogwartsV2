@@ -7,17 +7,20 @@ import drf.pro.hogwartsv2.models.Casa;
 import drf.pro.hogwartsv2.models.Estudiante;
 import drf.pro.hogwartsv2.repositories.CasaRepository;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.List;
 
-@Component
 @Data
+@Component
+@RequiredArgsConstructor
 public class EstudianteMapper {
     @Autowired
-    private CasaRepository casaRepository;
+    private final CasaRepository casaRepository;
+    private final MascotaMapper mascotaMapper;
 
     public EstudianteDTO toDto(Estudiante estudiante) {
         if (estudiante == null) return null;
@@ -61,6 +64,8 @@ public class EstudianteMapper {
         estudiante.setFechaNacimiento(Date.valueOf(dto.getFechaNacimiento()));
         estudiante.setAnyoCurso(dto.getAnyoCurso());
 
+        estudiante.setMascota(mascotaMapper.toEntity(dto.getMascota()));
+
         return estudiante;
     }
 
@@ -68,5 +73,14 @@ public class EstudianteMapper {
         if (dto == null || estudiante == null) return;
 
         estudiante.setAnyoCurso(dto.getAnyoCurso());
+        estudiante.setFechaNacimiento(Date.valueOf(dto.getFechaNacimiento()));
+        if (dto.getMascota() == null){
+            if (estudiante.getMascota() != null) {
+                estudiante.getMascota().setEstudiante(null); // rompe la relación
+                estudiante.setMascota(null);
+            }
+        } else {
+            mascotaMapper.updateEntityFromDto(dto.getMascota(), estudiante.getMascota());
+        }
     }
 }

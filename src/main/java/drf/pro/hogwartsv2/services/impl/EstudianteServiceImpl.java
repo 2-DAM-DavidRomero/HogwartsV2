@@ -9,6 +9,7 @@ import drf.pro.hogwartsv2.repositories.EstudianteRepository;
 import drf.pro.hogwartsv2.services.EstudianteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
@@ -20,9 +21,12 @@ public class EstudianteServiceImpl implements EstudianteService{
 
 
     @Override
+    @Transactional
     public EstudianteDTO crearUsuario(EstudianteCreateDTO dto) {
 
         Estudiante estudiante = estudianteMapper.toEntity(dto);
+
+        estudiante.getMascota().setEstudiante(estudiante);
 
         Estudiante estudianteGuardado = estudianteRepository.save(estudiante);
 

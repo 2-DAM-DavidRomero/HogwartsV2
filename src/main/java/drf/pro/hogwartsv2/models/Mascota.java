@@ -1,5 +1,6 @@
 package drf.pro.hogwartsv2.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class Mascota {
     private String especie;
 
     @OneToOne
-    @JoinColumn(name = "id_estudiante", unique = true)
+    @JoinColumn(name = "id_estudiante")
+    @JsonBackReference
     private Estudiante estudiante;
 }

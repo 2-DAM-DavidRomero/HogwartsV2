@@ -1,5 +1,6 @@
 package drf.pro.hogwartsv2.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -32,8 +33,10 @@ public class Estudiante {
     @JoinColumn(name = "id_casa")
     private Casa casa;
 
-    @OneToOne(mappedBy = "estudiante", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Mascota mascota;
+
 
     @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EstudianteAsignatura> asignaturas;
