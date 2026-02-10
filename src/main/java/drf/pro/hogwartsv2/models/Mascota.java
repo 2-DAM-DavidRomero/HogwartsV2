@@ -20,7 +20,7 @@ public class Mascota {
     private String especie;
 
     @OneToOne
-    @JoinColumn(name = "id_estudiante")
+    @JoinColumn(name = "id_estudiante", nullable = false)
     @JsonBackReference
     private Estudiante estudiante;
 }

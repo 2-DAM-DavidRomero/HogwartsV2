@@ -7,4 +7,5 @@ import drf.pro.hogwartsv2.dtos.response.EstudianteDTO;
 public interface EstudianteService {
     EstudianteDTO crearUsuario(EstudianteCreateDTO dto);
     EstudianteDTO actualizarEstudiante(long id, EstudianteUpdateDTO dto);
+    void eliminarUsuario(Long id);
 }

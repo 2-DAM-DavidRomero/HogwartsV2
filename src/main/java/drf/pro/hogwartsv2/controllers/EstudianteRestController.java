@@ -31,4 +31,10 @@ public class EstudianteRestController {
         return ResponseEntity.ok(usuarioActualizado); // 200 OK
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
+        estudianteService.eliminarUsuario(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
 }

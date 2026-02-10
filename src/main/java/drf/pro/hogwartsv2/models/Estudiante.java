@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SoftDelete;
 
 import java.sql.Date;
 import java.util.List;
-
+@SoftDelete
 @Data
 @Entity
 @Table(name = "estudiante")
@@ -38,6 +39,9 @@ public class Estudiante {
     private Mascota mascota;
 
 
-    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "estudiante",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<EstudianteAsignatura> asignaturas;
+
 }

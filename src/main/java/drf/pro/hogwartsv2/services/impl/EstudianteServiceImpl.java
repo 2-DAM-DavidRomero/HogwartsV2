@@ -7,6 +7,7 @@ import drf.pro.hogwartsv2.mappers.EstudianteMapper;
 import drf.pro.hogwartsv2.models.Estudiante;
 import drf.pro.hogwartsv2.repositories.EstudianteRepository;
 import drf.pro.hogwartsv2.services.EstudianteService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,4 +43,15 @@ public class EstudianteServiceImpl implements EstudianteService{
         Estudiante usuarioActualizado = estudianteRepository.save(usuarioExistente);
 
         return estudianteMapper.toDto(usuarioActualizado);    }
+
+    @Override
+    @Transactional
+    public void eliminarUsuario(Long id) {
+        Estudiante estudiante = estudianteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id: " + id));
+
+
+        // El perfil asociado se eliminará automáticamente debido a CascadeType.ALL y orphanRemoval = true
+        estudianteRepository.delete(estudiante);
+    }
 }

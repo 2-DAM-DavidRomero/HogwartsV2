@@ -24,6 +24,7 @@ public class Asignatura {
     @OneToOne(mappedBy = "asignatura")
     private Profesor profesor;
 
-    @OneToMany(mappedBy = "asignatura", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "asignatura")
     private List<EstudianteAsignatura> estudiantes;
+
 }
