@@ -42,7 +42,8 @@ public class EstudianteServiceImpl implements EstudianteService{
         estudianteMapper.updateEntityFromDto(dto, usuarioExistente);
         Estudiante usuarioActualizado = estudianteRepository.save(usuarioExistente);
 
-        return estudianteMapper.toDto(usuarioActualizado);    }
+        return estudianteMapper.toDto(usuarioActualizado);
+    }
 
     @Override
     @Transactional
