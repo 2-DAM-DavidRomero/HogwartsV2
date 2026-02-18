@@ -1,10 +1,12 @@
 # Usamos una imagen base ligera con Java 25
 FROM eclipse-temurin:25-jdk-alpine
-# Directorio de trabajo dentro del contenedor
+
 WORKDIR /app
-# Copiamos el JAR generado por Maven al contenedor
-COPY target/*.jar app.jar
-# Informamos que la app escucha en el puerto 8080
+
+# Opción más compatible: Copia el JAR que NO es el 'plain'
+# El asterisco ayuda si el nombre tiene versiones (0.0.1-SNAPSHOT)
+COPY build/libs/*-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
-# Comando para arrancar la aplicación
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
