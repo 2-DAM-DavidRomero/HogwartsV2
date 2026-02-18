@@ -71,6 +71,6 @@ jobs:
           aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }} # Necesario si usas cuentas de AWS Academy/Learner Lab
           region: us-east-1
           application_name: HogwartsAPI # Actualizado según tu contexto
-          environment_name: HogwartsAPI-env
+          environment_name: HogwartsAPI-env1
           version_label: "hogwarts-v-${{ github.run_number }}"
           deployment_package: docker-compose.yml
